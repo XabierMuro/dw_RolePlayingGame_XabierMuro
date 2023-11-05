@@ -1,3 +1,10 @@
+
+<?php
+require_once(dirname(__FILE__) . '\app\controllers\creature\indexController.php');
+$creatures = indexAction();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,3 +61,22 @@
                 </div>
                 </div>
             </div>
+        
+        <?php
+        for ($i = 0; $i < sizeof($creatures); $i+=3) {
+            ?>
+            <div class="card-group"> 
+           <!--  <div class="row">  -->
+            <?php
+            for ($j = $i; $j < ($i + 3); $j++) {
+                if (isset($creatures[$j])) {
+
+                    echo $creatures[$j]->creature2HTML();
+                }
+            }
+            ?>
+            </div> 
+            <!-- /.row -->
+                <?php
+            }
+            

@@ -20,15 +20,11 @@ class Creature {
     private $lifeLevel;
     private $weapon;
     
-    public function __construct($idCreature, $name, $decription, $avatar, $attackPower, $lifeLevel, $weapon) {
-        $this->idCreature = $idCreature;
-        $this->name = $name;
-        $this->decription = $decription;
-        $this->avatar = $avatar;
-        $this->attackPower = $attackPower;
-        $this->lifeLevel = $lifeLevel;
-        $this->weapon = $weapon;
+     public function __construct() {
+        
     }
+    
+    
     public function getIdCreature() {
         return $this->idCreature;
     }
@@ -85,6 +81,25 @@ class Creature {
         $this->weapon = $weapon;
     }
 
+    function creature2HTML() {
+        $result = '<div class=" col-md-4 ">';
+         $result .= '<div class="card ">';
+          $result .= ' <img class="card-img-top rounded mx-auto d-block avatar" src='.$this->getAvatar().' alt="Card image cap">';
+            $result .= '<div class="card-block">';
+                $result .= '<h2 class="card-title">' . $this->getName() . '</h2>';
+                $result .= '<p class=" card-text description">'.$this->getDecription().'</p>';
+             $result .= '</div>';
+             $result .= ' <div  class=" btn-group card-footer" role="group">';
+                $result .= '<a type="button" class="btn btn-secondary" href="app/views/detail.php?id='.$this->getIdCreature().'">Detalles</a>';
+                $result .= '<a type="button" class="btn btn-success" href="app/views/edit.php?id='.$this->getIdCreature().'">Modificar</a> ';
+                $result .= '<a type="button" class="btn btn-danger" href="app/controllers/creature/deleteController.php?id='.$this->getIdCreature().'">Borrar</a> ';
+            $result .= ' </div>';
+         $result .= '</div>';
+     $result .= '</div>';
+
+
+        return $result;
+    }
 
     
     

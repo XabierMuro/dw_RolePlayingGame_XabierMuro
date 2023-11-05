@@ -14,7 +14,7 @@ require_once(dirname(__FILE__) . '..\..\conf\PersistentManager.php');
 
 class CreatureDAO {
     
-    const CANDIDATE_TABLE = 'creature';
+    const CREATURE_TABLE = 'creature';
 
     //Conexión a BD
     private $conn = null;
@@ -25,7 +25,7 @@ class CreatureDAO {
     }
 
     public function selectAll() {
-        $query = "SELECT * FROM " . CandidateDAO::CANDIDATE_TABLE;
+        $query = "SELECT * FROM " . CreatureDAO::CREATURE_TABLE;
         $result = mysqli_query($this->conn, $query);
         $creatures= array();
         while ($creatureBD = mysqli_fetch_array($result)) {
@@ -47,11 +47,11 @@ class CreatureDAO {
     }
 
     public function insert($creature) {
-        $query = "INSERT INTO " . CandidateDAO::CANDIDATE_TABLE .
-                " ( name, description, avatar, attackPower, lifeLevel, weapon) VALUES(?,?,?,?,?,?,?)";
+        $query = "INSERT INTO " . CreatureDAO::CREATURE_TABLE .
+                " ( name, description, avatar, attackPower, lifeLevel, weapon) VALUES(?,?,?,?,?,?)";
         $stmt = mysqli_prepare($this->conn, $query);
         $name = $creature->getName();
-        $description = $creature->getDescription();
+        $description = $creature->getDecription();
         $avatar = $creature->getAvatar();
         $attackPower = $creature->getAttackPower();
         $lifeLevel = $creature->getLifeLevel();
@@ -62,7 +62,7 @@ class CreatureDAO {
     }
 
     public function selectById($id) {
-        $query = "SELECT name, surname, email FROM " . CandidateDAO::CANDIDATE_TABLE . " WHERE idCreature=?";
+        $query = "SELECT name, description, avatar, attackPower, lifeLevel, weapon FROM " . CreatureDAO::CREATURE_TABLE . " WHERE idCreature=?";
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, 'i', $id);
         mysqli_stmt_execute($stmt);
@@ -83,7 +83,7 @@ class CreatureDAO {
     }
 
     public function update($creature) {
-        $query = "UPDATE " . CandidateDAO::CANDIDATE_TABLE .
+        $query = "UPDATE " . CreatureDAO::CREATURE_TABLE .
                 " SET name=?, description=?, avatar=?, attackPower=?, lifeLevel=?, weapon=?"
                 . " WHERE idCandidate=?";
         $stmt = mysqli_prepare($this->conn, $query);
@@ -99,7 +99,7 @@ class CreatureDAO {
     }
     
     public function delete($id) {
-        $query = "DELETE FROM " . CandidateDAO::CANDIDATE_TABLE . " WHERE idCreature =?";
+        $query = "DELETE FROM " . CreatureDAO::CREATURE_TABLE . " WHERE idCreature =?";
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, 'i', $id);
         return $stmt->execute();

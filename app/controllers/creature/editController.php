@@ -34,7 +34,7 @@ function editAction() {
     $creatureDAO = new CreatureDAO();
     $creatureDAO->update($creature);
 
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
 }
 
 ?>

@@ -6,8 +6,8 @@
  */
 
 //Es necesario que importemos los ficheros creados con anterioridad porque los vamos a utilizar desde este fichero.
-require_once(dirname(__FILE__) . '/../../persistence/DAO/CreatureDAO.php');
-require_once(dirname(__FILE__) . '/../../app/models/Creature.php');
+require_once(dirname(__FILE__) . '/../../../persistence/DAO/CreatureDAO.php');
+require_once(dirname(__FILE__) . '/../../../app/models/Creature.php');
 
 $creatureDAO = new CreatureDAO();
 
@@ -19,8 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 function deleteAction() {
     $id = $_GET["id"];
 
-    $creatureDAO = new CandidateDAO();
+    $creatureDAO = new CreatureDAO();
     $creatureDAO->delete($id);
 
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
 }

@@ -1,9 +1,9 @@
 <?php
 
 //Es necesario que importemos los ficheros creados con anterioridad porque los vamos a utilizar desde este fichero.
-require_once(dirname(__FILE__) . '/../../persistence/DAO/CreatureDAO.php');
-require_once(dirname(__FILE__) . '/../../app/models/Creature.php');
-require_once(dirname(__FILE__) . '/../../app/models/validations/ValidationRules.php');
+require_once(dirname(__FILE__) . '/../../../persistence/DAO/CreatureDAO.php');
+require_once(dirname(__FILE__) . '/../../../app/models/Creature.php');
+require_once(dirname(__FILE__) . '\..\..\..\app\models\validations\ValidationsRules.php');
 
 
 
@@ -14,25 +14,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function createAction() {
     $name = ValidationsRules::test_input($_POST["name"]);
-    $descriprion = ValidationsRules::test_input($_POST["description"]);
     $avater = ValidationsRules::test_input($_POST["avatar"]);
-    $attackPower = ValidationsRules::test_input($_POST["attackPower"]);
-    $lifeLevel = ValidationsRules::test_input($_POST["lifeLevel"]);
+    $descriprion = ValidationsRules::test_input($_POST["description"]);
+    $attackPower = ValidationsRules::test_input($_POST["attackpower"]);
+    $lifeLevel = ValidationsRules::test_input($_POST["lifelevel"]);
     $weapon = ValidationsRules::test_input($_POST["weapon"]);
     // TODOD hacer uso de los valores validados 
     $creature = new Creature();
-    $creature->setName($_POST["name"]);
-    $creature->setdescription($_POST["description"]);
-    $creature->setAvatar($_POST["avatar"]);
-     $creature->setAttackPower($_POST["attackPower"]);
-      $creature->setLifeLevel($_POST["lifeLevel"]);
-       $creature->setWeapon($_POST["Weapon"]);
+    $creature->setName($name);
+    $creature->setAvatar($avater);
+    $creature->setDecription($descriprion);
+     $creature->setAttackPower($attackPower);
+      $creature->setLifeLevel($lifeLevel);
+       $creature->setWeapon($weapon);
 
     //Creamos un objeto CreatureDAO para hacer las llamadas a la BD
     $creatureDAO = new CreatureDAO();
     $creatureDAO->insert($creature);
     
-    header('Location: ../../index.php');
+    header('Location: ../../../index.php');
     
 }
 ?>
